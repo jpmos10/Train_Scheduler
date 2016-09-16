@@ -1,0 +1,106 @@
+<!DOCTYPE>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Moment.JS -->
+    <script src="assets/javascript/moment.min.js"></script>
+    <title></title>
+</head>
+
+<body>
+    <<div class="container-fluid">
+        <<div class="jumbotron text-center" style="background-color: purple; color: yellow">
+            <h1> CHUG-A-CHUG RAILROAD </h1>
+            </div>
+            </div>
+            <!-- Train Schedule Table -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary" >
+                            <div class="panel-heading">Current Train Schedule</div>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Train Name</th>
+                                                    <th>Destination</th>
+                                                    <th>Frequency (min)</th>
+                                                    <th>Next Arrival</th>
+                                                    <th>Minutes Away</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <!-- Example Data -->
+                                                <tr>
+                                                    <td>CHUG-A-LUG EXPRESS</td>
+                                                    <td>DAllas</td>
+                                                    <td>60</td>
+                                                    <td>07:00 PM</td>
+                                                    <td>60</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CHUG-A-LUG EXPRESS</td>
+                                                    <td>DAllas</td>
+                                                    <td>60</td>
+                                                    <td>07:00 PM</td>
+                                                    <td>60</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>CHUG-A-LUG EXPRESS</td>
+                                                    <td>DAllas</td>
+                                                    <td>60</td>
+                                                    <td>07:00 PM</td>
+                                                    <td>60</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Table Ends -->
+            <!-- Employee Input Form -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel panel-primary" >
+                            <div class="panel-heading">Add Train</div>
+                            <div class="panel-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="trainName">Train Name:</label>
+                                        <input type="text" class="form-control" id="trainName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="trainDest">Destination</label>
+                                        <input type="text" class="form-control" id="trainDest">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="frequency">Frequency (min)</label>
+                                        <input type="text" class="form-control" id="frequency">
+                                    </div>
+                                    
+                                    <button type="submit" id="addTrain" class="btn btn-default">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- link to js scripts to go here -->
+</body>
+
+</html>
