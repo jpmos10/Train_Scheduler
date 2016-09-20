@@ -11,12 +11,13 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Moment.JS -->
     <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
     <title></title>
 </head>
 
 <body>
-    <<div class="container-fluid">
-        <<div class="jumbotron text-center" style="background-color: purple; color: yellow">
+    <div class="container-fluid">
+        <div class="jumbotron text-center" style="background-color: purple; color: yellow">
             <h1> CHUG-A-CHUG RAILROAD </h1>
             </div>
             </div>
@@ -39,29 +40,15 @@
                                                     <th>Minutes Away</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody id=trains>
                                                 <!-- Example Data -->
-                                                <tr>
+                                                <!-- <tr>
                                                     <td>CHUG-A-LUG EXPRESS</td>
                                                     <td>DAllas</td>
                                                     <td>60</td>
                                                     <td>07:00 PM</td>
                                                     <td>60</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>CHUG-A-LUG EXPRESS</td>
-                                                    <td>DAllas</td>
-                                                    <td>60</td>
-                                                    <td>07:00 PM</td>
-                                                    <td>60</td>
-                                                </tr>
-                                                <tr>
-                                                    <td>CHUG-A-LUG EXPRESS</td>
-                                                    <td>DAllas</td>
-                                                    <td>60</td>
-                                                    <td>07:00 PM</td>
-                                                    <td>60</td>
-                                                </tr>
+                                                </tr> -->
                                             </tbody>
                                         </table>
                                     </div>
@@ -72,7 +59,7 @@
                 </div>
             </div>
             <!-- Table Ends -->
-            <!-- Employee Input Form -->
+            <!-- ADD Train -->
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
@@ -89,8 +76,12 @@
                                         <input type="text" class="form-control" id="trainDest">
                                     </div>
                                     <div class="form-group">
+                                        <label for="trainDest">First Train Time (HH:mm-military time)</label>
+                                        <input type="text" class="form-control" id="firstTrainTime">
+                                    </div>
+                                    <div class="form-group">
                                         <label for="frequency">Frequency (min)</label>
-                                        <input type="text" class="form-control" id="frequency">
+                                        <input type="text" class="form-control" id="trfrequency">
                                     </div>
                                     <button type="submit" id="addTrain" class="btn btn-default">Submit</button>
                                 </form>
@@ -100,11 +91,8 @@
                 </div>
             </div>
             <!-- link to js scripts to go here -->
-
-<script src="assets/js/train.js"></script>
-
-            <!-- firebase -->
-<script src="https://www.gstatic.com/firebasejs/3.4.0/firebase.js"></script>
+            <script src="assets/js/train.js"></script>
+            
 </body>
 
 </html>

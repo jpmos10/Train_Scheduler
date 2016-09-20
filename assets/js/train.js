@@ -7,6 +7,7 @@ var config = {
     messagingSenderId: "589897693668"
 };
 firebase.initializeApp(config);
+
 var database = firebase.database();
 
 
@@ -15,16 +16,21 @@ $("#addTrain").on("click", function() {
 
     // Grabs user input
     var trainName = $("#trainName").val().trim();
-    var etrainDest = $("#trainDest").val().trim();
-    //var empStart = moment($("#startInput").val().trim(), "DD/MM/YY").format("X");
-    var frequency = $("#frequency").val().trim();
+    var trainDest = $("#trainDest").val().trim();
+    var firstTrainTime = $("#firstTrainTime").val().trim();
+    var trfrequency = $("#trfrequency").val().trim();
+
+    console.log(trainName);
+    console.log(trainDestination);
+    console.log(firstTrainTime);
+    console.log(trFrequency);
 
     // Creates local "temporary" object for holding employee data
     var newTrain = {
         name: trainName,
-        role: trainDest,
-        //start: empStart,
-        frequency: frequency
+        Dest: trainDest,
+        nextArrivalTime: firstTrainTime,
+        frequency: trfrequency
     }
 
     // Uploads employee data to the database
@@ -33,8 +39,8 @@ $("#addTrain").on("click", function() {
     // Logs everything to console
     console.log(newTrain.trainName);
     console.log(newTrain.trainDest);
-    //console.log(newTrain.start);
-    console.log(newTrain.frequency)
+    console.log(newTrain.nextArrivalTime);
+    console.log(newTrain.trfrequency)
 
     // Alert
     alert("Train successfully added");
@@ -42,8 +48,8 @@ $("#addTrain").on("click", function() {
     // Clears all of the text-boxes
     $("#trainName").val("");
     $("#trainDest").val("");
-    //$("#startInput").val("");
-    $("#frequency").val("");
+    $("#firstTrainTime").val("");
+    $("#trfrequency").val("");
 
     // Prevents moving to new page
     return false;
@@ -58,27 +64,48 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     // Store everything into a variable.
     var trainName = childSnapshot.val().trainName;
     var trainDest = childSnapshot.val().trainDest;
-    //var empStart = childSnapshot.val().start;
+    var firstTrainTime = childSnapshot.val().firstTrainTime;
     var frequency = childSnapshot.val().frequency;
 
     // Employee Info
     console.log(trainName);
     console.log(trainDest);
-    //console.log(empStart);
+    console.log(firstTrainTime);
     console.log(frequency);
 
-    // Prettify the employee start
-    var empStartPretty = moment.unix(empStart).format("MM/DD/YY");
-    // Calculate the months worked using hardconre math
-    // To calculate the months worked
-    var empMonths = moment().diff(moment.unix(empStart, 'X'), "months");
-    console.log(empMonths);
+    var tFrequency = parseInt(newTrain.frequency);
+    var firstTime = newTrain.nextArrivalTime;
 
-    // Calculate the total billed rate
-    var empBilled = empMonths * empRate;
-    console.log(empBilled);
+    // First Time (pushed back 1 year to make sure it comes before current time)
+    var firstTimeConverted = moment(firstTime, "hh:mm").subtract(1, "years");
+    console.log("firstTimeConverted:" + moment(firstTimeConverted));
+
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
+
+    // Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    // Time apart (remainder)
+    var tRemainder = diffTime % tFrequency;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = tFrequency - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes")
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"))
 
     // Add each train's data into the table
-    $("#employeeTable > tbody").append("<tr><td>" + empName + "</td><td>" + empRole + "</td><td>" + empStartPretty + "</td><td>" + empMonths + "</td><td>" + empRate + "</td><td>" + empBilled + "</td></tr>");
+    $("#trains > tbody").append("<tr><td>" + newTrain.name + "</td><td>" + newTrain.Dest + "</td><td>" + newTrain.frequency + "min </td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain + "min" + "</td></tr>");
 
 });
+ // newTrain = {
+ //        name: trainName,
+ //        Dest: trainDest,
+ //        nextArrivalTime: firstTrainTime,
+ //        frequency: frequency
