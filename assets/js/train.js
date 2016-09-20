@@ -21,9 +21,9 @@ $("#addTrain").on("click", function() {
     var trfrequency = $("#trfrequency").val().trim();
 
     console.log(trainName);
-    console.log(trainDestination);
+    console.log(trainDest);
     console.log(firstTrainTime);
-    console.log(trFrequency);
+    console.log(trfrequency);
 
     // Creates local "temporary" object for holding employee data
     var newTrain = {
@@ -37,13 +37,13 @@ $("#addTrain").on("click", function() {
     database.ref().push(newTrain);
 
     // Logs everything to console
-    console.log(newTrain.trainName);
-    console.log(newTrain.trainDest);
+    console.log(newTrain.name);
+    console.log(newTrain.Dest);
     console.log(newTrain.nextArrivalTime);
     console.log(newTrain.trfrequency)
 
     // Alert
-    alert("Train successfully added");
+    //alert("Train successfully added");
 
     // Clears all of the text-boxes
     $("#trainName").val("");
@@ -56,22 +56,22 @@ $("#addTrain").on("click", function() {
 });
 
 
-// 3. Create Firebase event for adding employee to the database and a row in the html when a user adds an entry
+// 3. Create Firebase event for adding trains to the database and a row in the html when a user adds an entry
 database.ref().on("child_added", function(childSnapshot, prevChildKey) {
-
+var newTrain = childSnapshot.val()
     console.log(childSnapshot.val());
 
     // Store everything into a variable.
-    var trainName = childSnapshot.val().trainName;
-    var trainDest = childSnapshot.val().trainDest;
-    var firstTrainTime = childSnapshot.val().firstTrainTime;
-    var frequency = childSnapshot.val().frequency;
+    // var trainName = childSnapshot.val().trainName;
+    // var trainDest = childSnapshot.val().trainDest;
+    // var firstTrainTime = childSnapshot.val().firstTrainTime;
+    // var frequency = childSnapshot.val().frequency;
 
-    // Employee Info
+    // Train INfo
     console.log(trainName);
     console.log(trainDest);
     console.log(firstTrainTime);
-    console.log(frequency);
+    console.log(trfrequency);
 
     var tFrequency = parseInt(newTrain.frequency);
     var firstTime = newTrain.nextArrivalTime;
@@ -101,11 +101,7 @@ database.ref().on("child_added", function(childSnapshot, prevChildKey) {
     console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"))
 
     // Add each train's data into the table
-    $("#trains > tbody").append("<tr><td>" + newTrain.name + "</td><td>" + newTrain.Dest + "</td><td>" + newTrain.frequency + "min </td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain + "min" + "</td></tr>");
+    $("#trains").append("<tr><td>" + newTrain.name + "</td><td>" + newTrain.Dest + "</td><td>" + newTrain.frequency + "min </td><td>" + moment(nextTrain).format("hh:mm") + "</td><td>" + tMinutesTillTrain + "min" + "</td></tr>");
 
 });
- // newTrain = {
- //        name: trainName,
- //        Dest: trainDest,
- //        nextArrivalTime: firstTrainTime,
- //        frequency: frequency
+ 
